@@ -11,7 +11,8 @@ const { typeDefs, resolvers } = require('./schemas');
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }) => ({ req })
 });
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/myfishDB', {

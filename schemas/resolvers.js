@@ -2,8 +2,9 @@ const User = require("../models/User");
 const ForSale = require("../models/ForSale");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { UserInputError } = require('apollo-server');
-const { validateRegisterInput, validateLoginInput } = require('../utils/validators')
+const { UserInputError, AuthenticationError } = require('apollo-server');
+const { validateRegisterInput, validateLoginInput } = require('../utils/validators');
+const auth = require("../utils/auth");
 
 // helper function 
 function generateToken(user) {
@@ -19,7 +20,7 @@ const resolvers = {
     Query: {
         async getAllFish() {
             try {
-                const forSale = await ForSale.find();
+                const forSale = await ForSale.find().sort({ createdAt: -1 });
                 return forSale;
             } catch (err) {
                 throw new Error(err);
@@ -103,7 +104,44 @@ const resolvers = {
                 id: res._id,
                 token
             }
+        },
+
+        async createFishPost(parent, { fishname, price, size, quantity, location }, context){
+            const user = auth(context);
+            console.log(user);
+
+            const newFishPost = new ForSale({
+                fishname,
+                price,
+                size,
+                quantity,
+                location,
+                user: user.id,
+                username: user.username,
+                createdAt: new Date().toISOString()
+            });
+
+            const fishPost = await newFishPost.save();
+
+            return fishPost;
+        },
+
+        async deleteFishPost(parent, { fishId }, context){
+            const user = auth(context);
+
+            try{
+                const fishPost = await ForSale.findById(fishId);
+                if(user.username === fishPost.username){
+                    await fishPost.delete();
+                    return 'Congrats on selling your fish!';
+                } else {
+                    throw new AuthenticationError('Action not allowed');
+                }
+            } catch(err){
+                throw new Error(err);
+            }
         }
+
     }
 }
 
