@@ -1,0 +1,58 @@
+[
+    {
+        "username": "Clarky",
+        "email": "clarky@fishdev.dev",
+        "password": "iamthedev117",
+        "description": "hey i am dan and i specialise in american cichlids"
+    },
+    {
+        "username": "Brian Kernighan",
+        "email": "bkernighan@fishfriends.dev",
+        "password": "password01"
+    },
+    {
+        "username": "Max Kanat-Alexander",
+        "email": "mkanatalexander@fishfriends.dev",
+        "password": "password02"
+    },
+    {
+        "username": "Why The Lucky Stiff",
+        "email": "wtls@fishfriends.dev",
+        "password": "password03"
+    },
+    {
+        "username": "Kent Beck",
+        "email": "kbeck@fishfriends.dev",
+        "password": "password04"
+    },
+    {
+        "username": "Edward V. Berard",
+        "email": "evberard@fishfriends.dev",
+        "password": "password05"
+    },
+    {
+        "username": "Alan Kay",
+        "email": "akay@fishfriends.dev",
+        "password": "password06"
+    },
+    {
+        "username": "C.A.R. Hoare",
+        "email": "choare@fishfriends.dev",
+        "password": "password07"
+    },
+    {
+        "username": "David Thomas",
+        "email": "dthomas@fishfriends.dev",
+        "password": "password08"
+    },
+    {
+        "username": "Donald Knuth",
+        "email": "dknuth@fishfriends.dev",
+        "password": "password09"
+    },
+    {
+        "username": "Lernantino",
+        "email": "lernantino@fishfriends.dev",
+        "password": "password10"
+    }
+]
