@@ -3,56 +3,67 @@
         "username": "Clarky",
         "email": "clarky@fishdev.dev",
         "password": "iamthedev117",
-        "description": "hey i am dan and i specialise in american cichlids"
+        "description": "hey i am dan and i specialise in american cichlids",
+        "createdAt": "seed"
     },
     {
         "username": "Brian Kernighan",
         "email": "bkernighan@fishfriends.dev",
-        "password": "password01"
+        "password": "password01",
+        "createdAt": "seed"
     },
     {
         "username": "Max Kanat-Alexander",
         "email": "mkanatalexander@fishfriends.dev",
-        "password": "password02"
+        "password": "password02",
+        "createdAt": "seed"
     },
     {
         "username": "Why The Lucky Stiff",
         "email": "wtls@fishfriends.dev",
-        "password": "password03"
+        "password": "password03",
+        "createdAt": "seed"
     },
     {
         "username": "Kent Beck",
         "email": "kbeck@fishfriends.dev",
-        "password": "password04"
+        "password": "password04",
+        "createdAt": "seed"
     },
     {
         "username": "Edward V. Berard",
         "email": "evberard@fishfriends.dev",
-        "password": "password05"
+        "password": "password05",
+        "createdAt": "seed"
     },
     {
         "username": "Alan Kay",
         "email": "akay@fishfriends.dev",
-        "password": "password06"
+        "password": "password06",
+        "createdAt": "seed"
     },
     {
         "username": "C.A.R. Hoare",
         "email": "choare@fishfriends.dev",
-        "password": "password07"
+        "password": "password07",
+        "createdAt": "seed"
     },
     {
         "username": "David Thomas",
         "email": "dthomas@fishfriends.dev",
-        "password": "password08"
+        "password": "password08",
+        "createdAt": "seed"
     },
     {
         "username": "Donald Knuth",
         "email": "dknuth@fishfriends.dev",
-        "password": "password09"
+        "password": "password09",
+        "createdAt": "seed"
     },
     {
         "username": "Lernantino",
         "email": "lernantino@fishfriends.dev",
-        "password": "password10"
+        "password": "password10",
+        "createdAt": "seed"
     }
 ]
