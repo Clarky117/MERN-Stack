@@ -17,21 +17,35 @@ function generateToken(user) {
 
 const resolvers = {
     Query: {
-        async getFish() {
+        async getAllFish() {
             try {
                 const forSale = await ForSale.find();
                 return forSale;
             } catch (err) {
                 throw new Error(err);
             }
+        },
+
+        async getFish(parent, { fishId }) {
+            try {
+                const fish = await ForSale.findById(fishId);
+                if (fish) {
+                    return fish;
+                } else {
+                    throw new Error('Fish not found');
+                }
+            } catch (err) {
+                throw new Error(err);
+            }
         }
+
     },
 
     Mutation: {
         async login(parent, { username, password }) {
             const { errors, valid } = validateLoginInput(username, password);
 
-            if(!valid){
+            if (!valid) {
                 throw new UserInputError('Errors', { errors });
             }
 
@@ -73,7 +87,6 @@ const resolvers = {
                 })
             }
             // create auth token
-
             const newUser = new User({
                 email,
                 username,

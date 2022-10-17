@@ -9,6 +9,7 @@ type ForSale{
     size: Int!
     quantity: Int!
     location: String!
+    createdAt: String!
 }
 
 type User{
@@ -20,7 +21,8 @@ type User{
 }
 
 type Query{
-    getFish: [ForSale]
+    getAllFish: [ForSale]
+    getFish(fishId: ID!): ForSale
 }
 
 input RegisterInput{
@@ -33,6 +35,8 @@ input RegisterInput{
 type Mutation{
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
+    # createFishPost(fishname: String!, price: Int!, size: Int!, quantity: Int!, location: String!): ForSale!
+    # deleteFishPost(fishId: ID!): String!
 }
 `
 
