@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const { UserInputError, AuthenticationError } = require('apollo-server');
 const { validateRegisterInput, validateLoginInput } = require('../utils/validators');
 const auth = require("../utils/auth");
+const { argsToArgsConfig } = require("graphql/type/definition");
 
 // helper function 
 function generateToken(user) {
@@ -13,7 +14,7 @@ function generateToken(user) {
         id: user.id,
         email: user.email,
         username: user.username
-    }, secret, { expiresIn: '1h' });
+    }, secret, { expiresIn: '2h' });
 }
 
 const resolvers = {
@@ -108,7 +109,24 @@ const resolvers = {
 
         async createFishPost(parent, { fishname, price, size, quantity, location }, context) {
             const user = auth(context);
-            console.log(user);
+            // console.log(user);
+
+            // revisit if this messes things up
+            if (args.fishname.trim() === ''){
+                throw new Error('Type of fish must not be empty');
+            }
+            if (args.price.trim() === ''){
+                throw new Error('Price of fish must not be empty');
+            }
+            if (args.size.trim() === ''){
+                throw new Error('Size of fish must not be empty');
+            }
+            if (args.quantity.trim() === ''){
+                throw new Error('Quantity of fish must not be empty');
+            }
+            if (args.location.trim() === ''){
+                throw new Error('Location of fish must not be empty');
+            }
 
             const newFishPost = new ForSale({
                 fishname,
