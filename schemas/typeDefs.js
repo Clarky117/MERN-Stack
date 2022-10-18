@@ -10,6 +10,21 @@ type ForSale{
     quantity: Int!
     location: String!
     createdAt: String!
+    comments: [Comment]!
+    thumbsup: [ThumbsUp]!
+}
+
+type Comment{
+    id: ID!
+    createdAt: String!
+    username: String!
+    body: String!
+}
+
+type ThumbsUp{
+    id: ID!
+    username: String!
+    createdAt: String!
 }
 
 type User{
@@ -37,7 +52,9 @@ type Mutation{
     login(username: String!, password: String!): User!
     createFishPost(fishname: String!, price: Int!, size: Int!, quantity: Int!, location: String!): ForSale!
     deleteFishPost(fishId: ID!): String!
-}
-`
+    createComment(postId: String!, body: String!): ForSale!
+    deleteComment(postId: ID!, commentId: ID!): ForSale!
+    toggleThumbsUp(postId: ID!): ForSale!
+}`
 
 module.exports = typeDefs;

@@ -106,7 +106,7 @@ const resolvers = {
             }
         },
 
-        async createFishPost(parent, { fishname, price, size, quantity, location }, context){
+        async createFishPost(parent, { fishname, price, size, quantity, location }, context) {
             const user = auth(context);
             console.log(user);
 
@@ -126,19 +126,87 @@ const resolvers = {
             return fishPost;
         },
 
-        async deleteFishPost(parent, { fishId }, context){
+        async deleteFishPost(parent, { fishId }, context) {
             const user = auth(context);
 
-            try{
+            try {
                 const fishPost = await ForSale.findById(fishId);
-                if(user.username === fishPost.username){
+                if (user.username === fishPost.username) {
                     await fishPost.delete();
                     return 'Congrats on selling your fish!';
                 } else {
                     throw new AuthenticationError('Action not allowed');
                 }
-            } catch(err){
+            } catch (err) {
                 throw new Error(err);
+            }
+        },
+
+        async createComment(parent, { postId, body }, context) {
+            const { username } = auth(context);
+            if (body.trim() === '') {
+                throw new UserInputError('Comment is empty', {
+                    errors: {
+                        body: 'Comment must not be empty'
+                    }
+                })
+            }
+
+            const post = await ForSale.findById(postId);
+
+            if (post) {
+                post.comments.unshift({
+                    body,
+                    username,
+                    createdAt: new Date().toISOString()
+                });
+                await post.save();
+                return post;
+            } else {
+                throw new UserInputError('Post not found')
+            }
+        },
+
+        async deleteComment(parent, { postId, commentId }, context) {
+            const { username } = auth(context);
+
+            const post = await ForSale.findById(postId);
+
+            if (post) {
+                const commentIndex = post.comments.findIndex((c) => c.id === commentId);
+
+                if (post.comments[commentIndex].username === username) {
+                    post.comments.splice(commentIndex, 1);
+                    await post.save();
+                    return post;
+                } else {
+                    throw new AuthenticationError('Action not allowed')
+                }
+            } else {
+                throw new UserInputError('Post not found');
+            }
+        },
+
+        async toggleThumbsUp(parent, { postId }, context){
+            const { username } = auth(context);
+
+            const post = await ForSale.findById(postId);
+            if(post){
+                if(post.thumbsup.find(like => like.username === username)){
+                    // already thumbed
+                    post.thumbsup = post.thumbsup.filter(like => like.username !== username);
+                } else {
+                    // de thumbed
+                    post.thumbsup.push({
+                        username,
+                        createdAt: new Date().toISOString()
+                    })
+                }
+
+                await post.save();
+                return post;
+            } else {
+                throw new UserInputError('Post not found')
             }
         }
 
@@ -146,3 +214,4 @@ const resolvers = {
 }
 
 module.exports = resolvers;
+
