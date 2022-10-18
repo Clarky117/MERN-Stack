@@ -1,11 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import React from 'react';
-import './App.css';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import { Container } from 'semantic-ui-react';
 
 import 'semantic-ui-css/semantic.min.css'
+import './App.css';
+import Header from './components/Header';
 
 function App() {
 
@@ -13,22 +15,25 @@ function App() {
 
     {
       path: "/",
-      element: <Home/>
+      element: <Home />
     },
     {
       path: "/login",
-      element: <Login/>
+      element: <Login />
     },
     {
       path: "/register",
-      element: <Register/>
+      element: <Register />
     }
 
   ])
 
   return (
     <div>
-      <RouterProvider router={router} />
+      <Container>
+        <Header />
+        <RouterProvider router={router} />
+      </Container>
     </div>
   );
 }
