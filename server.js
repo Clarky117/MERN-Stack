@@ -12,7 +12,7 @@ const { typeDefs, resolvers } = require('./schemas');
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => ({ req })
+    context: ({ req }) => ({ req })  // TODO: look at week 22 activity 18
 });
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/myfishDB', {
