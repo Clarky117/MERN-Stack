@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+import 'semantic-ui-css/semantic.min.css'
 
 function App() {
 
