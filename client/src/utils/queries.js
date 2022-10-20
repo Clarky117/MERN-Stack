@@ -2,9 +2,7 @@ import { gql } from '@apollo/client';
 
 export const GET_ALL_FISH_QUERY = gql`
     query getAllFish{
-        getAllFish{
-
-        
+        getAllFish{        
         id
         fishname 
         username 
